@@ -12,8 +12,9 @@ function startGame() {
       break;
     }
   }
-
 }
+
+
 
 // a function to continue or quit the game as user wants
 function continueGame() {
@@ -58,29 +59,29 @@ function playRound(humanChoice, computerChoice) {
   else if (humanChoice === 'rock') {
     if (computerChoice === 'scissors') {
       humanScore++
-      console.log(`You Won ${humanChoice} beats ${computerChoice}`);
+      console.log(`You Scored ${humanChoice} beats ${computerChoice}`);
     }
     else {
       computerScore++
-      console.log(`You Lose ${computerChoice} beats ${humanChoice}`);
+      console.log(`You Lost ${computerChoice} beats ${humanChoice}`);
     }
   }
 
   else if (humanChoice === 'paper') {
     if (computerChoice === 'rock') {
       humanScore++
-      console.log(`You Won ${humanChoice} beats ${computerChoice}`);
+      console.log(`You Scored ${humanChoice} beats ${computerChoice}`);
     }
     else {
       computerScore++
-      console.log(`You Lose ${computerChoice} beats ${humanChoice}`);
+      console.log(`You Scored ${computerChoice} beats ${humanChoice}`);
     }
   }
 
   else if (humanChoice === 'scissors') {
     if (computerChoice === 'paper') {
       humanScore++
-      console.log(`You Won ${humanChoice} beats ${computerChoice}`);
+      console.log(`You Scored ${humanChoice} beats ${computerChoice}`);
     }
     else {
       computerScore++
@@ -90,7 +91,7 @@ function playRound(humanChoice, computerChoice) {
 
   else {
     //if wrong input, play again
-    console.log(`${humanChoice} is not allowed,Enter Rock,Paper,or Scissors`);
+    alert (`${humanChoice} is not allowed,Enter Rock,Paper,or Scissors`);
     return continueGame();
   }
 }
