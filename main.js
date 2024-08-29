@@ -3,8 +3,9 @@ let humanScore = 0;
 let computerScore = 0;
 
 startGame();
+showWinner();
 
-//define startgame here
+
 function startGame() {
 // each game has five rounds unless quited
   for (let i = 1; i <= 5; i++) {
@@ -28,8 +29,6 @@ function continueGame() {
   // otherewise continue the game
   return playRound(humanChoice, computerChoice);
 }
-
-// functions to get user input
 
 function getComputerChoice() {
   let randomNo = Math.floor(Math.random() * 3);
@@ -93,5 +92,18 @@ function playRound(humanChoice, computerChoice) {
     //if wrong input, play again
     alert (`${humanChoice} is not allowed,Enter Rock,Paper,or Scissors`);
     return continueGame();
+  }
+}
+
+
+function showWinner() {
+  if(humanScore > computerScore) {
+    alert(`You won ${humanScore} to ${computerScore}`);
+  }
+  else if(humanScore === computerScore) {
+    alert(`You lost ${computerScore} to ${humanScore}`);
+  }
+  else {
+    alert('tie');
   }
 }
