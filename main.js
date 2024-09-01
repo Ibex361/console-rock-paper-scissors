@@ -1,109 +1,77 @@
-// intialise variables
-let humanScore = 0;
-let computerScore = 0;
+let options = ['rock','paper','scissors']
+let Round = 5;
 
-startGame();
-showWinner();
+playGame();
 
+function playGame() {
+  let humanScore = 0;
+  let computerScore = 0;
 
-function startGame() {
-// each game has five rounds unless quited
-  for (let i = 1; i <= 5; i++) {
-    if (continueGame() === 'quit') {
-      break;
-    }
+  for(let i=0; i<Round;i++) {
+    playRound();
   }
+
+  if(humanScore === computerScore) {
+    alert("human Won");
+  }
+  else if(humanScore > computerScore) {
+    alert(`You Won ${humanScore} to ${computerScore}`);
+  }
+  else {
+    alert(`You Lost ${computerScore} to ${humanScore}`);
+  }
+
+
+function playRound() {
+  let humanChoice = ''
+  let firstTry = true;
+  let promptMsg = 'Rock,Paper,Scissors Shoot!'
+
+  while(!options.includes(humanChoice)) {
+    firstTry = false;
+    if(!firstTry) {
+      promptMsg = 'Enter valid input : Rock,Paper,Scissors'
+    }
+    humanChoice = getHumanChoice(promptMsg);
+  }
+
+  let computerChoice = getComputerChoice();
+
+  getWinner(humanChoice,computerChoice);
 }
 
-
-
-// a function to continue or quit the game as user wants
-function continueGame() {
-  const humanChoice = getHumanChoice();
-  const computerChoice = getComputerChoice();
-  // user quitted,comply!
-  if (humanChoice === 'quit') {
-    console.log("You quited!")
-    return "quit"
-  }
-  // otherewise continue the game
-  return playRound(humanChoice, computerChoice);
+function getHumanChoice(promptMsg) {
+  return prompt(promptMsg).toLowerCase();
 }
 
 function getComputerChoice() {
-  let randomNo = Math.floor(Math.random() * 3);
+  const randomIndex = Math.floor(Math.random()*3)
+  return options[randomIndex];
+}
 
-  if (randomNo === 0) {
-    return 'rock';
+function getWinner(...choices) {
+  let winCases = [
+		   ['rock','scissors'],
+		   ['scissors','paper'],
+		   ['paper','rock']
+		  ];
+  let won = winCases.some(winCase => {
+     return winCase.every( (value,index) => {
+     return value === choices[index] ;
+     });
+  });
+
+  if(choices[0]===choices[1]) {
+    alert("Tie!");
   }
-  else if (randomNo == 1) {
-    return 'paper';
+  else if(won) {
+    humanScore++
+    alert(`You Won ! ,${choices[0]} beats ${choices[1]}`)
   }
   else {
-    return 'scissors';
+    computerScore++
+    alert(`You Lost! ${choices[1]} beats ${choices[0]}`);
   }
 }
 
-function getHumanChoice() {
-  return prompt("Shoot ! ").toLowerCase();
-}
-
-
-// here is the rule for each round
-function playRound(humanChoice, computerChoice) {
-
-  if (humanChoice === computerChoice) {
-    console.log("Tie!");
-  }
-  else if (humanChoice === 'rock') {
-    if (computerChoice === 'scissors') {
-      humanScore++
-      console.log(`You Scored ${humanChoice} beats ${computerChoice}`);
-    }
-    else {
-      computerScore++
-      console.log(`You Lost ${computerChoice} beats ${humanChoice}`);
-    }
-  }
-
-  else if (humanChoice === 'paper') {
-    if (computerChoice === 'rock') {
-      humanScore++
-      console.log(`You Scored ${humanChoice} beats ${computerChoice}`);
-    }
-    else {
-      computerScore++
-      console.log(`You Scored ${computerChoice} beats ${humanChoice}`);
-    }
-  }
-
-  else if (humanChoice === 'scissors') {
-    if (computerChoice === 'paper') {
-      humanScore++
-      console.log(`You Scored ${humanChoice} beats ${computerChoice}`);
-    }
-    else {
-      computerScore++
-      console.log(`You Lose ${computerChoice} beats ${humanChoice}`);
-    }
-  }
-
-  else {
-    //if wrong input, play again
-    alert (`${humanChoice} is not allowed,Enter Rock,Paper,or Scissors`);
-    return continueGame();
-  }
-}
-
-
-function showWinner() {
-  if(humanScore > computerScore) {
-    alert(`You won ${humanScore} to ${computerScore}`);
-  }
-  else if(humanScore === computerScore) {
-    alert(`You lost ${computerScore} to ${humanScore}`);
-  }
-  else {
-    alert('tie');
-  }
 }
