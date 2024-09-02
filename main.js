@@ -43,8 +43,10 @@ function setButtons() {
 }
 
 function showRoundResult(event) {
-  currentRound++;
+// prevent double clicking of the button
+  event.target.disabled = 'true'
 
+  currentRound++;
   const humanChoice = event.target.textContent;
   const computerChoice = getComputerChoice();
   const computerChoiceDiv = document.querySelector('p');
@@ -60,8 +62,9 @@ function showRoundResult(event) {
     showDiv.textContent = getWinner(humanChoice, computerChoice);
 
     document.body.appendChild(showDiv);
-    console.log(currentRound);
     if (currentRound != finalRound) {
+// reenable the button
+      event.target.disabled = 'false'
       setTimeout(setButtons, ONE_SEC);
     }
     else {
