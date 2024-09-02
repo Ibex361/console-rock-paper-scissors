@@ -2,4 +2,5 @@
 
 This is my work for The Odin Project **Rock Paper Scissors** console game
 
-NOTE: I intentionally avoided use of some code that might have made the game better ,like while loops and array methods like include() because i wanted to use only the knowledge that I got from the curriculum.
+In this project I used the javascript knowledges that I got from The Odin project only.that means the code does not necessarily adheres to best practices.
+
